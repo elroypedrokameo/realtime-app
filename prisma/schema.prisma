@@ -1,6 +1,12 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// - Everytime modify schema, you have to run two commands
+// - npx prisma generate
+// - npx prisma db push
+
+// npx prisma migrate reset to reset your database
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -30,7 +36,7 @@ model Server {
   id String @id @default(uuid())
   name String
   imageUrl String @db.Text
-  inviteCode String @db.Text
+  inviteCode String @unique
 
   profileId String
   profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
